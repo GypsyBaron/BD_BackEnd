@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -22,7 +23,8 @@ public class UsersResource {
 
     @GetMapping(value = "/all")
     public List<Users> getAll() {
-        return usersRepository.findAll();
+        List<Users> users = usersRepository.findAll();
+        return users;
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,11 +32,16 @@ public class UsersResource {
     public Map checkLogin(@RequestBody LoginForm loginForm) {
         Users user = usersRepository.findByUsernameAndPassword(loginForm.getUsername(), loginForm.getPassword());
 
+        HashMap<String, String> map = new HashMap<>();
+
         if (user != null) {
-            return Collections.singletonMap("response", "Login successful");
+            map.put("response", "Prisijungta sėkmingai");
+            map.put("id", user.getId().toString());
         } else {
-            return Collections.singletonMap("response", "Invalid data");
+            map.put("response", "Neteisingi prisijungimo duomenys");
+            map.put("id", "null");
         }
+        return map;
     }
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
