@@ -30,6 +30,7 @@ public class Foods {
 
     public Foods() {
 
+
     }
 
     public Integer getId() {
@@ -40,12 +41,12 @@ public class Foods {
         this.id = id;
     }
 
-    public String getFoods() {
+    public String getFood() {
         return food;
     }
 
-    public void setFoods(String foods) {
-        this.food = foods;
+    public void setFood(String food) {
+        this.food = food;
     }
 
     public Integer getCal() {

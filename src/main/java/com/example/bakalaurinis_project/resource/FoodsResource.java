@@ -1,12 +1,11 @@
 package com.example.bakalaurinis_project.resource;
 
 import com.example.bakalaurinis_project.model.Foods;
+import com.example.bakalaurinis_project.model.TestString;
 import com.example.bakalaurinis_project.repository.FoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,13 +18,12 @@ public class FoodsResource {
 
     @GetMapping(value = "/all")
     public List<Foods> getAll() {
-        List<Foods> foods = foodsRepository.findAll();
-        return foods;
+        return foodsRepository.findAll();
     }
 
-    @GetMapping(value = {"/title/{title}"})
-    public List<Foods> getByTitle(@PathVariable String title) {
-        List<Foods> foods = foodsRepository.findFoodsByFoodContaining(title);
-        return foods;
+    @PostMapping(value = "/title", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Foods> getByTitle(@RequestBody TestString foodtitle) {
+        return foodsRepository.findFoodsByFoodContaining(foodtitle.getFoodtitle());
     }
 }
