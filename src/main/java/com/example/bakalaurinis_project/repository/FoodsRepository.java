@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface FoodsRepository extends JpaRepository<Foods, Integer> {
     List<Foods> findFoodsByFoodContaining(String title);
+    Boolean existsFoodsByFood(String food);
+    Foods findTopByOrderByIdDesc();
 }
