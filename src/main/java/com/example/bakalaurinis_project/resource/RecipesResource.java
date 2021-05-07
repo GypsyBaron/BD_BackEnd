@@ -42,6 +42,6 @@ public class RecipesResource {
         }
 
         recipesRepository.save(new Recipes(recipeForm.getName(), recipeForm.getUrl()));
-        return Collections.singletonMap("response", "Maistas pridėtas");
+        return Collections.singletonMap("response", "Receptas pridėtas");
     }
 }
